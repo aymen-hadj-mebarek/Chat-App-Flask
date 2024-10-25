@@ -1,0 +1,650 @@
+*{
+  margin: 0;
+  padding: 0;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+body{
+  background: rgb(79,79,79);
+  background: linear-gradient(185deg, rgba(79,79,79,1) 0%, rgba(0,0,0,1) 100%);
+  overflow: hidden;
+}
+#main{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-content: center;
+}
+#header{
+  position: absolute;
+  width: 100%;
+  border-radius: 100% ;
+  box-sizing: border-box;
+  padding: 30px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  background-color: white;
+  align-items: center;
+  text-align: center;
+  z-index: 3;
+  transition: left 0.3s ease-in;
+}
+#header * .text{
+  margin: 50px;
+  font-size: 30px;
+  height: fit-content;
+  width: 80%;
+}
+#header * .link{
+  margin: 50px;
+  font-size: 20px;
+  width: 80%;
+}
+#header * .link  a{
+  font-size: 25px;
+  color: grey;
+  position: relative;
+}
+#header * .link  a:hover{
+  cursor: pointer;
+}
+#header * .link  a::after{
+  content: "";
+  width: 0%;
+  height: 3px;
+  background-color: black;
+  position: absolute;
+  bottom: -3px;
+  left: 0;
+  opacity: 1;
+  animation: del_underline_animation 0.2s linear;
+}
+#header * .link  a:hover::after{
+  opacity: 1;
+  width: 100%;
+  animation: add_underline_animation 0.2s linear;
+}
+
+
+#login{
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+#signup{
+  position: relative;
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+form{
+  background-color: white;
+  height: 50%;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: solid black 5px;
+  border-radius: 50px;
+  position: relative;
+  justify-content: space-around;
+}
+#login form{
+  height: 40%;
+}
+form::before{
+  border-radius: 60px;
+  content: '';
+  position: absolute;
+  top: -3px;
+  left: -3px;
+  right: -3px;
+  bottom: -3px;
+  background: white;
+  filter: blur(5px);
+  z-index: -1;
+  animation: border_animation 3s linear infinite;
+}
+form .forumTitle{
+  font-size: 40px;
+  margin: 20px;
+}
+form .champ{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+form .champ label{
+  font-size: 20px;
+  width: 40%;
+  text-align: left;
+  height: 30px;
+}
+form .champ input{
+  font-size: 15px;
+  width: 55%;
+  text-align: center;
+  height: 30px;
+  border-radius: 10px;
+}
+form button{
+  font-size: 30px;
+  height: 50px;
+  width: 30%;
+  border: solid;
+  border-radius: 20px;
+  background-color: white;
+}
+form button:hover{
+  cursor: pointer;
+  background: linear-gradient(185deg, rgba(79,79,79,1) 0%, rgba(0,0,0,1) 100%);
+  color: white;
+}
+form button:active{
+  background-color: black;
+  color: white;
+}
+form input[type="submit"]{
+  font-size: 30px;
+  height: 50px;
+  width: 30%;
+  border: solid;
+  border-radius: 20px;
+  background-color: white;
+}
+form input[type="submit"]:hover{
+  cursor: pointer;
+  background: linear-gradient(185deg, rgba(79,79,79,1) 0%, rgba(0,0,0,1) 100%);
+  color: white;
+}
+form input[type="submit"]:active{
+  background-color: black;
+  color: white;
+}
+form #imagePreview{
+  border-radius: 100%;
+  margin: 10px;
+  height: 100px;
+  width: 100px;
+}
+form input[type="file"]{
+  width: 100%;
+  position: absolute;
+  top: 10%;
+  width: 100px;
+  height: 100px;
+  border-radius: 100%;
+  opacity: 0;
+}
+form a{
+  text-decoration: none;
+  color: black;
+}
+form a:hover{
+  text-decoration: underline;
+}
+.flash{
+  position: absolute;
+  color: white;
+  font-size: 20px;
+  width: 70%;
+  background-color: rgba(255,0,0,0.6);
+  border: solid rgb(98, 29, 29) ;
+  border-radius: 50px;
+  top: 5%;
+  left: 15%;
+  padding: 10px 30px;
+  text-align: center;
+  z-index: 5;
+  transition: opacity 1s;
+}
+
+.contacts{
+  border-right: solid;
+  background-color: rgb(69,69,69);
+  width: 30%;
+  height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+.contacts .contact{
+  overflow: hidden;
+  padding: 0 30px;
+  margin: 10px 20px;
+  border-radius: 30px;
+  border: solid white;
+  transition: all ease 0.5s;
+}
+.contacts .contact:hover{
+  background-color: whitesmoke;
+  cursor: pointer;
+  transition: all ease 0.5s;
+}
+.contacts .contact:hover a{
+  text-decoration: underline;
+  color: black;
+  transition: all ease 0.5s;
+}
+.contacts .contact a{
+  color: white;
+  text-decoration: none;
+  transition: all ease 0.5s;
+  display: flex;
+}
+.contacts .contact a p{
+  display: inline;
+  position: relative;
+  left: 50px;
+}
+.contacts .contact a img{
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  margin: 0 10px;
+  image-resolution: initial;
+}
+
+.profile{
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.profile .menu{
+  display: flex;
+  justify-content: right;
+  font-size: 50px;
+  color: white;
+  width: 100%;
+  height: 15%;
+}
+.profile .menu a,li{
+  text-decoration: none;
+  list-style: none;
+  color: white;
+  padding: 10px 30px;
+}
+.profile .menu a:hover{
+  text-decoration: underline;   
+}
+.profile .pdp{
+  margin: 50px;
+  color: white;
+  border-radius: 100%;
+  width: 300px;
+  height: 300px;
+  border: solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;   
+}
+.profile .pdp img{
+  border-radius: 100%;
+  width: 100%;
+  height: 100%;
+}
+
+.profile .name{
+  font-size: 50px;
+  color: white;
+  width: 100%;
+  text-align: center;
+}
+.profile .chat{
+  width: 80%;
+  height: 90%;
+  overflow-y: scroll;
+}
+.sent{
+  display: flex;
+  justify-content: flex-end;
+  color: white;
+}
+.received{
+  display: flex;
+  justify-content: flex-start;
+}
+.received .content{
+  background-color: rgb(69,69,69);
+  color: white;
+}
+.sent .content{
+  background-color: black;
+  color: white;
+}
+.content{
+  margin: 10px;
+  font-size: 20px;
+  border-radius: 30px;
+  padding: 10px 20px ;
+}
+.text{
+  width: 80%;
+  border: solid white;
+  border-radius: 30px;
+  height: 30px;
+  margin: 20px;
+  display: flex;
+  justify-content: center;
+}
+.text input{
+  width: 80%;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  font-size: 20px;
+  padding: 10px;
+}
+.text button{
+  font-size: 20px;
+  width: 20%;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+  transition: all 0.5 ease;
+}
+.text button:hover{
+  background-color: grey;
+  color: whitesmoke;
+  font-size: 22px;
+  transition: all 0.5 ease;
+}
+.text button:active{
+  background-color: black;
+  color: whitesmoke;
+  transition: all 0.5 ease;
+}
+::-webkit-scrollbar{
+  width: 20px;
+  display: none;
+}
+::-webkit-scrollbar-thumb{
+  background: black;
+  border-radius: 50px;
+}
+::-webkit-scrollbar-track{
+  border-radius: 50px;   
+}
+@keyframes border_animation {
+  0% {
+    transform: scale(1,1);
+  }
+  50% {
+    transform: scale(1.05,1.05);
+  }
+}
+@keyframes add_underline_animation {
+  0% {
+    width: 0%;
+  }
+  100% {
+    width: 100%;
+  }
+}
+@keyframes del_underline_animation {
+  0% {
+    width: 100%;
+  }
+  100% {
+    width: 0%;
+  }
+}
+
+@media (max-height: 915px) and (max-width: 605px) {
+  #header{
+      position: absolute;
+      width: 100%;
+      border-radius: 150px ;
+      box-sizing: border-box;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-around;
+      background-color: white;
+      align-items: center;
+      text-align: center;
+      z-index: 3;
+      transition: top 0.3s ease-in;
+  }
+  #header .signup{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50%;
+  }
+  #header .login{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 50%;
+  }
+  #header .login .text{
+      font-size: 20px;
+      width: 70%;
+      margin: 0;
+  }
+  #header .login .link{
+      width: 40%;
+      margin: 0;
+  }
+  #header .signup .text{
+      position: relative;
+      font-size: 20px;
+      width: 70%;
+      margin: 0;
+      bottom: -40%;
+  }
+  #header .signup .link{
+      position: relative;
+      width: 40%;
+      margin: 0;
+      top: -40%;
+  }
+  #main{
+      flex-direction: column;
+  }
+  #login{
+      width: 100%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+  }
+  #signup{
+      position: relative;
+      width: 100%;
+      height: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+  }
+  form{
+      background-color: white;
+      height: 90%;
+      width: 60%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border: solid black 5px;
+      border-radius: 50px;
+      position: relative;
+      justify-content: space-around;
+  }
+  #login form{
+      height: 80%;
+  }
+  
+  form .forumTitle{
+      font-size: 40px;
+      margin: 0;
+  }
+  form .champ{
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+  }
+  form .champ label {
+      font-size: 15px;
+      width: 90%;
+      text-align: center;
+      height: fit-content;
+      padding-bottom: 10px;
+  }
+  form .champ input{
+      font-size: 15px;
+      width: 55%;
+      height: fit-content;
+      text-align: center;
+      border-radius: 10px;
+  }
+  form button{
+      font-size: 20px;
+      height: fit-content;
+      width: 40%;
+      border: solid;
+      border-radius: 20px;
+      background-color: white;
+  }
+  form input[type="submit"]{
+      font-size: 20px;
+      height: fit-content;
+      width: 40%;
+      border: solid;
+      border-radius: 20px;
+      background-color: white;
+  }
+  
+  .contacts{
+      display: flex;
+      border-right: solid;
+      background-color: rgb(69,69,69);
+      width: 100%;
+      height: 12%;
+      overflow-y: hidden;
+      overflow-x: scroll;
+  }
+  .contacts .contact{
+      height: fit-content;
+      padding: 0;
+      margin: 0 5px;
+      width: 45%;
+      border-radius: 30px;
+      border: solid white;
+      transition: all ease 0.5s;
+  }
+  .contacts .contact a p{
+      position: relative;
+      left: 0;
+  }
+
+  .profile{
+      height: 85%;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+  }
+  .profile .menu{
+      display: flex;
+      font-size: 50px;
+      color: white;
+      width: 100%;
+      height: 10%;
+      border-bottom: solid;
+  }
+  .profile .menu a,li{
+      text-decoration: none;
+      list-style: none;
+      color: white;
+      font-size: 25px;
+      padding: 10px;
+  }
+  .profile .name{
+      font-size: 50px;
+      color: white;
+      width: 100%;
+      text-align: center;
+      position: relative;
+      bottom: 10px;
+  }
+
+  .profile .chat{
+      width: 100%;
+      height: 80%;
+      overflow-y: scroll;
+  }
+  .sent{
+      display: flex;
+      justify-content: flex-end;
+      color: white;
+  }
+  .received{
+      display: flex;
+      justify-content: flex-start;
+  }
+  .received .content{
+      background-color: rgb(69,69,69);
+      color: white;
+  }
+  .sent .content{
+      background-color: black;
+      color: white;
+  }
+  .content{
+      margin: 10px;
+      font-size: 20px;
+      border-radius: 30px;
+      padding: 10px 20px ;
+  }
+  .text{
+      width: 100%;
+      height: 10%;
+      border: solid white;
+      border-radius: 30px;
+      height: 30px;
+      margin: 20px;
+      display: flex;
+      justify-content: center;
+  }
+  .text input{
+      width: 80%;
+      border-top-left-radius: 30px;
+      border-bottom-left-radius: 30px;
+      font-size: 20px;
+      padding: 10px;
+  }
+  .text button{
+      font-size: 20px;
+      width: 20%;
+      border-top-right-radius: 30px;
+      border-bottom-right-radius: 30px;
+      transition: all 0.5 ease;
+  }
+  .text button:hover{
+      background-color: grey;
+      color: whitesmoke;
+      font-size: 22px;
+      transition: all 0.5 ease;
+  }
+  .text button:active{
+      background-color: black;
+      color: whitesmoke;
+      transition: all 0.5 ease;
+  }
+  ::-webkit-scrollbar{
+      width: 5px;
+      display: none;
+  }
+}

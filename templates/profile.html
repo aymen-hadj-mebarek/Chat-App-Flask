@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title%}
+    <title>Profile</title>
+    {% endblock %}
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+</head>
+<body>
+    <div id="main">
+    <div class="contacts">
+        {% set i = 0 %}
+        {% for contact in contacts %}
+        <div class="contact">
+            <a href="/contacts/{{contact.id}}">
+                {% if contact.picture == None%}
+                    <div class="pdp">
+                        <img src="{{url_for('static',filename='images/profile.png')}}" alt="profile picture">
+                    </div>
+                {% else %}
+                    <div class="pdp">
+                        <img src="data:image/jpeg;base64,{{ contacts_images[i] }}" alt="profile picture">
+                        {% set i = i + 1 %}
+                    </div>
+                {% endif %}
+                <div>
+                    <h2>{{ contact.username }}</h2>
+                    <p>{{ contact.email }}</p>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="profile">
+        {% block messages%}
+        <div class="menu">
+    <li><a href="/settings">Settings</a></li>
+    <li><a href="/logout">Logout</a></li>
+        </div>
+        {% if name.picture == None%}
+        <div class="pdp">
+            <img src="{{url_for('static',filename='images/profile.png')}}" alt="profile picture">
+        </div>
+        {% else %}
+            <div class="pdp">
+                <img src="data:image/jpeg;base64,{{ pdp }}" alt="profile picture">
+            </div>
+        {% endif %}
+        <div class="name">
+            {{name.username}}
+        </div>
+        {% endblock %}
+    </div>
+    </div>
+    <script src="{{url_for('static',filename='scripts/script.js')}}"></script>
+</body>
+</html>

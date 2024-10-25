@@ -1,0 +1,89 @@
+{%extends "profile.html"%}
+{% block title%}
+    <title>Chat with {{name.username}}</title>
+{% endblock %}
+{% block messages %}
+<div class="menu">
+    <li>{{name.username}}</li>
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+</div>
+<div id="sender_id" hidden>{{ sender }}</div>
+<div id="receiver_id" hidden>{{name.id}}</div>
+<div class="chat">
+    {% for message in messages %}
+    {% if message.sender == sender and message.receiver == name.id %}
+    <div class="sent">
+        <div class="content"> {{ message.context }} </div>
+     </div>
+    {% endif %}
+    {% if message.receiver == sender and message.sender == name.id %}
+    <div class="received">
+        <div class="content"> {{ message.context }} </div>
+     </div>
+    {% endif %}
+    {% endfor %}
+
+     
+</div>
+<div class="text">
+    <input type="text" id="message">
+    <button onclick="sendMessage()">Send</button>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js" integrity="sha512-q/dWJ3kcmjBLU4Qc47E4A9kTB4m3wuTY7vkFJDTZKjTs8jhyGQnaUrxa0Ytd0ssMZhbNua9hE+E7Qv1j+DyZwA==" crossorigin="anonymous"></script>
+<script type="text/javascript">
+
+    const createMessage = (msg,sender,receiver) => {
+        const chat = document.querySelector(".chat")
+        const sender_id = document.querySelector("#sender_id").innerHTML
+        const receiver_id = document.querySelector("#receiver_id").innerHTML
+        const sent = 
+        `
+        <div class="sent">
+            <div class="content"> ${msg} </div>
+        </div>
+        `;  
+        const receive = 
+        `
+        <div class="received">
+            <div class="content"> ${msg} </div>
+        </div>
+        `;
+        console.log(msg)
+        // inserting the message to the div so it will be showed
+        if (sender == sender_id && receiver == receiver_id){
+            chat.innerHTML += sent;
+        }else if (receiver == sender_id && sender == receiver_id){
+            chat.innerHTML += receive;
+        }
+
+        chat.scrollTop = chat.scrollHeight;
+    }
+
+    var socketio = io();
+    window.addEventListener("DOMContentLoaded", () => {
+        const scrollableDiv = document.querySelector(".chat");
+        scrollableDiv.scrollTop = scrollableDiv.scrollHeight;
+    });
+
+    function sendMessage() {
+        var messageInput = document.getElementById('message');
+        message = messageInput.value;
+        if( message != ""){
+            socketio.emit('message_from_client', { message_context: message });
+            messageInput.value = ""; 
+        }
+        
+    }
+    socketio.on("message", (data) => {
+        console.log("data");
+        console.log(data);
+        createMessage(data.message, data.sender, data.receiver)
+    })
+
+    socketio.on("connect",()=>{
+        console.log("Your connected")
+    })
+
+</script>
+{% endblock %}

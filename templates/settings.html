@@ -1,0 +1,63 @@
+{% extends "profile.html" %}
+{% block title %}
+<title>Settings</title>
+{% endblock %}
+
+{% block messages %}
+<div class="menu">
+    <li><a href="/profile">Profile</a></li>
+    <li><a href="/logout">Logout</a></li>
+</div>
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        {% for message in messages %}
+            <div class="flash error">{{ message }}</div>
+        {% endfor %}
+    {% endif %}
+    {% endwith %}
+<form action="/update" method="POST" style="margin-top: 100px; padding: 20px" enctype="multipart/form-data">
+    <input type="file" name="image" id="image" onchange="previewImage(event)">
+    {% if user.picture == None%}
+        <img id="imagePreview" src="{{url_for('static',filename='images/profile.png')}}">
+    {% else %}
+        <img id="imagePreview" src="data:image/jpeg;base64,{{ pdp }}">
+    {% endif %}
+    <a href="/deletepdp">Delete Profile Picture</a>
+    <div class="champ" style="width: 70%">
+        <label for="name">Name :</label>
+        <input name="name" type="text" value="{{user.username}}">
+    </div>
+    <div class="champ" style="width: 70%">
+        <label for="email">Email :</label>
+        <input name="email" type="text" value="{{user.email}}">
+    </div>
+    <div class="champ" style="width: 70%">
+        <label for="password">Password :</label>
+        <input name="password" type="text" value="{{user.password}}">
+    </div>
+    <input type="submit" value="Save">
+    
+</form>
+
+
+<script>
+    function previewImage(event) {
+        const imageInput = event.target;
+        const imagePreview = document.getElementById('imagePreview');
+        const file = imageInput.files[0];
+
+        if (file) {
+            const reader = new FileReader();
+
+            reader.onload = function(event) {
+                imagePreview.src = event.target.result;
+                imagePreview.style.display = 'block';
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            imagePreview.src = "{{url_for('static',filename='/images/profile.png')}}";
+        }
+    }
+</script>
+{% endblock %}

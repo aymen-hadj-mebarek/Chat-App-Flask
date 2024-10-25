@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentification</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/style.css')}}">
+</head>
+<body>
+    <div id="value" hidden>{{value}}</div>
+    <div id="main">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        {% for message in messages %}
+        <div class="flash error">{{ message }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div id="header">
+            <div class="signup">
+                <div class="text">
+                    This is my messenger App, would you please create an account so you can send messages, images, to your friends and contacts that are on the same app.
+                </div>
+                <div class="link">
+                    If you already have an account please press <a onclick="changepage()">here</a> to log in to your account.
+                </div>
+            </div>
+            <div class="login">
+                <div class="text">
+                    This is my messenger App, would you please log in in your account so you can send messages, images, to your friends and contacts that are on the same app.
+                    </div>
+                    <div class="link">
+                        If you don't have an account please press <a onclick="changepage()">here</a> to create an account.
+                    </div>
+            </div>
+            
+        </div>
+        <div id="signup">
+            <form action="" method="POST">
+                <div class="forumTitle">Sign Up</div>
+                <div class="champ">
+                    <label for="name">user name : </label>
+                        
+                    <input type="text" name="name" id="name"  required>
+                </div>
+                <div class="champ">
+                    <label for="emailadSU">Email address : </label>
+                        
+                    <input type="email" name="emailadSU" id="emailadSU"  required>
+                </div>
+                <div class="champ">
+                    <label for="mdpsSU">password : </label>
+                        
+                    <input type="password" name="mdpsSU" id="mdpsSU"  required>
+                </div>
+                <div class="champ">
+                    <label for="mdps_check">Confirm password : </label>
+                    <input type="password" name="mdps_check" id="mdps_check"  required>    
+                </div>
+                <button type="submit" name="signupBtn" id="signupBtn">Sign Up</button>
+            </form>
+        </div>
+        <div id="login">
+            <form action="" method="POST">
+                <div class="forumTitle">Login</div>
+                <div class="champ">
+                    <label for="emailadL">Email address or username : </label>
+                        
+                    <input type="text" name="emailadL" id="emailadL"  required>
+                </div>
+                <div class="champ">
+                    <label for="mdpsL">password : </label>
+                    <input type="password" name="mdpsL" id="mdpsL"  required>
+                </div>
+                <button type="submit" name="loginBtn" id="loginBtn">Login</button>
+            </form>
+        </div>
+    </div>
+<script src="{{url_for('static',filename='scripts/script.js')}}"></script>
+</body>
+</html>
